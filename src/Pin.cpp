@@ -6,7 +6,6 @@
 */
 
 #include "Pin.hpp"
-#include "IComponents.hpp"
 
 nts::Pin::Pin(const std::string &name, IComponent *componentOwner)
 {

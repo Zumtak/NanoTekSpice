@@ -9,7 +9,7 @@
 #define PIN_HPP_
 
 #include <functional>
-#include "IComponents.hpp"
+#include "components/IComponents.hpp"
 
 namespace nts {
     class Wire;
