@@ -16,6 +16,12 @@ SRC	= 	src/main.cpp \
 		src/components/14PinsComponents.cpp \
 		src/components/16PinsComponents.cpp \
 		src/components/24PinsComponents.cpp \
+		src/components/CompFalse.cpp \
+		src/components/CompTrue.cpp \
+		src/components/CompOutput.cpp \
+		src/components/CompInput.cpp \
+		src/components/CompClock.cpp \
+		src/components/Comp4001.cpp \
 
 OBJ	=	$(SRC:.cpp=.o)
 

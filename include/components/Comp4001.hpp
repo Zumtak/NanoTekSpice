@@ -16,8 +16,7 @@ namespace nts {
         Comp4001(const std::string &name) : Comp14Pins(name, nts::Comp4001)
         {}
         nts::Tristate compute(std::size_t pin = 1) override;
-        void setLink(std::size_t pin, nts::IComponent *other,
-                   std::size_t otherPin) override;
+        void dump(void) const override;
     };
 }
 
