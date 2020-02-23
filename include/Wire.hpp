@@ -14,10 +14,10 @@
 namespace nts {
     class Wire {
         public:
-            void addPin(const Pin &target, char end);
+            void addPin(const nts::Pin &target, char end);
         private:
-            std::vector<Pin> east;
-            std::vector<Pin> west;
+            std::vector<nts::Pin> east;
+            std::vector<nts::Pin> west;
     };
 }
 

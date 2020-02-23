@@ -33,7 +33,7 @@ void nts::Pin::setWire(Wire *wire)
     this->wire = wire;
 }
 
-Wire *nts::Pin::getWire(void) const
+nts::Wire *nts::Pin::getWire(void) const
 {
     return (this->wire);
 }

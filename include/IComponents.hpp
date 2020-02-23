@@ -8,7 +8,6 @@
 #ifndef ICOMPONENTS_HPP_
 #define ICOMPONENTS_HPP_
 
-#include <cstddef>
 #include <string>
 
 namespace nts {
@@ -24,7 +23,7 @@ namespace nts {
            virtual ~IComponent() = default;
        public:
            virtual nts::Tristate compute(std::size_t pin = 1) = 0;
-           virtual void setLink(std::size_t pin, nts::IComponent& other,
+           virtual void setLink(std::size_t pin, nts::IComponent *other,
                    std::size_t otherPin) = 0;
            virtual void dump() const = 0;
     };

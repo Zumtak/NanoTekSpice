@@ -12,6 +12,7 @@ CXXFLAGS = -W -Wall -Wextra -Iinclude/
 SRC	= 	src/main.cpp \
 		src/Pin.cpp \
 		src/Wire.cpp \
+		src/components/1PinComponents.cpp \
 		src/components/14PinsComponents.cpp \
 		src/components/16PinsComponents.cpp \
 		src/components/24PinsComponents.cpp \
