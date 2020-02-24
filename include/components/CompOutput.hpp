@@ -12,10 +12,12 @@
 
 namespace nts {
     class CompOutput : public Comp1Pin {
-        CompOutput(const std::string &name) : Comp1Pin(name, nts::Output)
-        {}
-        void displayState(void) const;
-        void dump(void) const override;
+        public:
+            CompOutput(const std::string &name) : Comp1Pin(name, nts::Output)
+            {}
+            nts::Tristate compute(std::size_t pin = 1) override;
+            void displayState(void) const;
+            void dump(void) const override;
     };
 }
 

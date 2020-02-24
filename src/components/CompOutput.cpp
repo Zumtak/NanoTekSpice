@@ -13,6 +13,12 @@ void nts::CompOutput::displayState(void) const
     std::cout << this->getName() << ": " << this->IOPins[0].getState() << std::endl;
 }
 
+nts::Tristate nts::CompOutput::compute(std::size_t pin)
+{
+    (void)pin;
+    return (this->IOPins[0].getState());
+}
+
 void nts::CompOutput::dump(void) const
 {
 }

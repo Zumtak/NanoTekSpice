@@ -12,10 +12,11 @@
 
 namespace nts {
     class Comp4011 : public Comp14Pins {
-        Comp4011(const std::string &name) : Comp14Pins(name, nts::Comp4011)
-        {}
-        nts::Tristate compute(std::size_t pin = 1) override;
-        void dump() const override;
+        public:
+            Comp4011(const std::string &name) : Comp14Pins(name, nts::Comp4011)
+            {}
+            nts::Tristate compute(std::size_t pin = 1) override;
+            void dump() const override;
     };
 }
 

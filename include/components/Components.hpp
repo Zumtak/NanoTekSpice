@@ -95,8 +95,8 @@ namespace nts {
             }
             Pin getPin(std::size_t pin = 1)
             {
-                if (this->IOPins.size() > pin)
-                    return (this->IOPins[1]);
+                if (this->IOPins.size() < pin)
+                    return (this->IOPins[0]);
                 return (this->IOPins[pin]);
             }
         protected:

@@ -44,4 +44,7 @@ re:	fclean all
 %.o: %.cpp
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
-.PHONY: re all clean fclean
+tests_run:
+	cd catch_tests && $(MAKE) && clear && ./tests
+
+.PHONY: re all clean fclean tests_run

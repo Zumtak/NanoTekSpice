@@ -12,12 +12,13 @@
 
 namespace nts {
     class CompFalse : public Comp1Pin {
-        CompFalse(const std::string &name) : Comp1Pin(name, nts::False)
-        {
-            this->IOPins[0].setState(nts::FALSE);
-        }
-        nts::Tristate compute(std::size_t pin = 1) override;
-        void dump(void) const override;
+        public:
+            CompFalse(const std::string &name) : Comp1Pin(name, nts::False)
+            {
+                this->IOPins[0].setState(nts::FALSE);
+            }
+            nts::Tristate compute(std::size_t pin = 1) override;
+            void dump(void) const override;
     };
 }
 

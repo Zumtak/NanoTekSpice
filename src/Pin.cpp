@@ -5,12 +5,17 @@
 ** Pin class functions
 */
 
+#include <iostream>
+#include <string>
+
 #include "Pin.hpp"
+#include "components/IComponents.hpp"
 
 nts::Pin::Pin(const std::string &name, IComponent *componentOwner)
 {
     this->id = name;
     this->componentOwner = componentOwner;
+    this->state = nts::UNDEFINED;
 }
 
 void nts::Pin::setState(const Tristate &state)
@@ -21,7 +26,7 @@ void nts::Pin::setState(const Tristate &state)
 
 nts::Tristate nts::Pin::getState(void) const
 {
-    nts::Tristate tmp = (nts::Tristate)(this->state & 252);
+    nts::Tristate tmp = (nts::Tristate)(this->state & 3);
     return (tmp);
 }
 

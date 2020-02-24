@@ -12,10 +12,13 @@
 
 namespace nts {
     class CompClock : public Comp1Pin {
-        CompClock(const std::string &name) : Comp1Pin(name, nts::Clock)
-        {}
-        nts::Tristate compute(std::size_t pin = 1) override;
-        void dump(void) const override;
+        public:
+            CompClock(const std::string &name) : Comp1Pin(name, nts::Clock)
+            {
+                this->IOPins[0].setState(nts::FALSE);
+            }
+            nts::Tristate compute(std::size_t pin = 1) override;
+            void dump(void) const override;
     };
 }
 

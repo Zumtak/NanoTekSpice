@@ -24,7 +24,7 @@ namespace nts {
             IComponent *getOwnerComponent(void) const;
         private:
             std::string id;
-            char state = nts::Tristate::UNDEFINED;
+            char state;
             IComponent *componentOwner;
             nts::Wire *wire = nullptr;
     };

@@ -1,0 +1,6 @@
+#include "components/Comp4001.hpp"
+
+int main(void)
+{
+    return 0;
+}

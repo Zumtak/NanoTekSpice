@@ -6,7 +6,6 @@
 */
 
 #include "components/Comp4011.hpp"
-#include "components/IComponents.hpp"
 
 nts::Tristate nts::Comp4011::compute(std::size_t pin)
 {
