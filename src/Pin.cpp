@@ -6,7 +6,6 @@
 */
 
 #include <iostream>
-#include <string>
 
 #include "Pin.hpp"
 #include "components/IComponents.hpp"
@@ -15,19 +14,19 @@ nts::Pin::Pin(const std::string &name, IComponent *componentOwner)
 {
     this->id = name;
     this->componentOwner = componentOwner;
-    this->state = nts::UNDEFINED;
+    this->currentState = nts::Tristate::UNDEFINED;
+    this->oldState = nts::Tristate::UNDEFINED;
 }
 
-void nts::Pin::setState(const Tristate &state)
+void nts::Pin::setState(Tristate state)
 {
-    this->state = this->state << 2;
-    this->state |= state;
+    this->oldState = this->currentState;
+    this->currentState = state;
 }
 
 nts::Tristate nts::Pin::getState(void) const
 {
-    nts::Tristate tmp = (nts::Tristate)(this->state & 3);
-    return (tmp);
+    return (this->currentState);
 }
 
 void nts::Pin::setWire(Wire *wire)
@@ -52,4 +51,9 @@ void nts::Pin::setOwnerComp(nts::IComponent *owner)
 nts::IComponent *nts::Pin::getOwnerComponent(void) const
 {
     return (this->componentOwner);
+}
+
+std::string nts::Pin::getId(void) const
+{
+    return (this->id);
 }

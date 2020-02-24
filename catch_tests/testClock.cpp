@@ -12,7 +12,7 @@ TEST_CASE("Basic Clock test")
 {
     nts::CompClock clock("my_clock");
 
-    REQUIRE(clock.getPin(0).getState() == nts::FALSE);
+    REQUIRE(clock.getPin(1).getState() == nts::FALSE);
     clock.compute();
-    REQUIRE(clock.getPin(0).getState() == nts::TRUE);
+    REQUIRE(clock.getPin(1).getState() == nts::TRUE);
 }

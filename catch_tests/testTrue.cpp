@@ -12,5 +12,5 @@ TEST_CASE("Basic true test")
 {
     nts::CompTrue trueComp("my_true");
 
-    REQUIRE(trueComp.getPin(0).getState() == nts::TRUE);
+    REQUIRE(trueComp.getPin(1).getState() == nts::TRUE);
 }

@@ -15,14 +15,17 @@ SRC	=	mainTest.cpp \
 		testTrue.cpp \
 		testFalse.cpp \
 		testOutput.cpp \
+		testComp4001.cpp \
 		../src/components/CompInput.cpp \
 		../src/components/CompClock.cpp \
 		../src/components/CompTrue.cpp \
 		../src/components/CompFalse.cpp \
 		../src/components/CompOutput.cpp \
+		../src/components/Comp4001.cpp \
 		../src/Pin.cpp \
 		../src/Wire.cpp \
 		../src/components/1PinComponents.cpp \
+		../src/components/14PinsComponents.cpp \
 
 OBJ	=	$(SRC:.cpp=.o)
 

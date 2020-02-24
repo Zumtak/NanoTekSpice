@@ -12,5 +12,5 @@ TEST_CASE("Basic output test")
 {
     nts::CompOutput outputComp("my_output");
 
-    REQUIRE(outputComp.getPin(0).getState() == nts::UNDEFINED);
+    REQUIRE(outputComp.getPin(1).getState() == nts::UNDEFINED);
 }

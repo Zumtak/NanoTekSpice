@@ -12,5 +12,5 @@ TEST_CASE("Basic false test")
 {
     nts::CompFalse falseComp("my_false");
 
-    REQUIRE(falseComp.getPin(0).getState() == nts::FALSE);
+    REQUIRE(falseComp.getPin(1).getState() == nts::FALSE);
 }

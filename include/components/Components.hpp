@@ -20,20 +20,20 @@ namespace nts {
         True,
         False,
         Output,
-        Comp4001,
-        Comp4008,
-        Comp4011,
-        Comp4013,
-        Comp4017,
-        Comp4030,
-        Comp4040,
-        Comp4069,
-        Comp4071,
-        Comp4081,
-        Comp4094,
-        Comp4514,
-        Comp4801,
-        Comp2716
+        COMP4001,
+        COMP4008,
+        COMP4011,
+        COMP4013,
+        COMP4017,
+        COMP4030,
+        COMP4040,
+        COMP4069,
+        COMP4071,
+        COMP4081,
+        COMP4094,
+        COMP4514,
+        COMP4801,
+        COMP2716
     };
     std::array<std::string, 19> const ComponentTypeString {
         "Clock",
@@ -89,15 +89,15 @@ namespace nts {
                 tmp->addPin(this->IOPins[pin], 0);
                 tmp->addPin(otherCmp->getPin(otherPin), 1);
             }
-            std::array<Pin, TNbPins> getPins(void)
+            std::array<Pin, TNbPins> &getPins(void)
             {
                 return (this->IOPins);
             }
-            Pin getPin(std::size_t pin = 1)
+            Pin &getPin(std::size_t pin = 1)
             {
-                if (this->IOPins.size() < pin)
+                if (pin < 1)
                     return (this->IOPins[0]);
-                return (this->IOPins[pin]);
+                return (this->IOPins[pin - 1]);
             }
         protected:
             std::string name;

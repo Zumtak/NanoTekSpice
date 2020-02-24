@@ -16,15 +16,17 @@ namespace nts {
     class Pin {
         public:
             Pin(const std::string &id, IComponent *componentOwner);
-            void setState(const Tristate &state);
+            void setState(Tristate state);
             Tristate getState(void) const;
             void setWire(nts::Wire *target);
             Wire *getWire(void) const;
             void setOwnerComp(IComponent *owner);
             IComponent *getOwnerComponent(void) const;
+            std::string getId(void) const;
         private:
             std::string id;
-            char state;
+            nts::Tristate currentState;
+            nts::Tristate oldState;
             IComponent *componentOwner;
             nts::Wire *wire = nullptr;
     };
