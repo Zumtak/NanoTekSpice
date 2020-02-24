@@ -16,12 +16,14 @@ SRC	=	mainTest.cpp \
 		testFalse.cpp \
 		testOutput.cpp \
 		testComp4001.cpp \
+		testComp4011.cpp \
 		../src/components/CompInput.cpp \
 		../src/components/CompClock.cpp \
 		../src/components/CompTrue.cpp \
 		../src/components/CompFalse.cpp \
 		../src/components/CompOutput.cpp \
 		../src/components/Comp4001.cpp \
+		../src/components/Comp4011.cpp \
 		../src/Pin.cpp \
 		../src/Wire.cpp \
 		../src/components/1PinComponents.cpp \
