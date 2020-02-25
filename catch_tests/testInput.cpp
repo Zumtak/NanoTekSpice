@@ -14,6 +14,9 @@ TEST_CASE("Basic input test")
     nts::CompInput inp("my_input");
 
     REQUIRE(inp.getPin(1).getState() == nts::Tristate::UNDEFINED);
-    inp.setNewState(nts::TRUE);
+    REQUIRE(inp.setNewState(nts::TRUE) == true);
     REQUIRE(inp.getPin(1).getState() == nts::Tristate::TRUE);
+    REQUIRE(inp.setNewState(-1) == true);
+    REQUIRE(inp.getPin(1).getState() == nts::Tristate::UNDEFINED);
+    REQUIRE(inp.setNewState(69) == false);
 }

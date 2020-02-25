@@ -7,6 +7,7 @@
 
 #include "catch.hpp"
 #include "components/CompClock.hpp"
+#include "components/IComponents.hpp"
 
 TEST_CASE("Basic Clock test")
 {
@@ -15,4 +16,6 @@ TEST_CASE("Basic Clock test")
     REQUIRE(clock.getPin(1).getState() == nts::FALSE);
     clock.compute();
     REQUIRE(clock.getPin(1).getState() == nts::TRUE);
+    clock.compute();
+    REQUIRE(clock.getPin(1).getState() == nts::FALSE);
 }

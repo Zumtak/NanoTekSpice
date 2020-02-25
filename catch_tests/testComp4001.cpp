@@ -36,7 +36,7 @@ TEST_CASE("Simple NOR with output 3 : !(1 | 1) => 0")
 
     component.getPin(1).setState(nts::TRUE);
     component.getPin(2).setState(nts::TRUE);
-    component.compute(3);
+    REQUIRE(component.compute(3) == nts::FALSE);
     REQUIRE(component.getPin(3).getState() == nts::FALSE);
 }
 
@@ -46,7 +46,7 @@ TEST_CASE("Simple NOR with output 3 : !(1 | 0) => 0")
 
     component.getPin(1).setState(nts::TRUE);
     component.getPin(2).setState(nts::FALSE);
-    component.compute(3);
+    REQUIRE(component.compute(3) == nts::FALSE);
     REQUIRE(component.getPin(3).getState() == nts::FALSE);
 }
 
@@ -56,7 +56,7 @@ TEST_CASE("Simple NOR with ouput 3 : !(0 | 1) => 0")
 
     component.getPin(1).setState(nts::FALSE);
     component.getPin(2).setState(nts::TRUE);
-    component.compute(3);
+    REQUIRE(component.compute(3) == nts::FALSE);
     REQUIRE(component.getPin(3).getState() == nts::FALSE);
 }
 
@@ -66,7 +66,7 @@ TEST_CASE("Simple NOR with output 3 : !(0 | 0) => 1")
 
     component.getPin(1).setState(nts::FALSE);
     component.getPin(2).setState(nts::FALSE);
-    component.compute(3);
+    REQUIRE(component.compute(3) == nts::TRUE);
     REQUIRE(component.getPin(3).getState() == nts::TRUE);
 }
 
@@ -80,7 +80,7 @@ TEST_CASE("Simple NOR with output 4 : !(1 | 1) => 0")
 
     component.getPin(5).setState(nts::TRUE);
     component.getPin(6).setState(nts::TRUE);
-    component.compute(4);
+    REQUIRE(component.compute(4) == nts::FALSE);
     REQUIRE(component.getPin(4).getState() == nts::FALSE);
 }
 
@@ -90,7 +90,7 @@ TEST_CASE("Simple NOR with output 4 : !(1 | 0) => 0")
 
     component.getPin(5).setState(nts::TRUE);
     component.getPin(6).setState(nts::FALSE);
-    component.compute(4);
+    REQUIRE(component.compute(4) == nts::FALSE);
     REQUIRE(component.getPin(4).getState() == nts::FALSE);
 }
 
@@ -100,7 +100,7 @@ TEST_CASE("Simple NOR with ouput 4 : !(0 | 1) => 0")
 
     component.getPin(5).setState(nts::FALSE);
     component.getPin(6).setState(nts::TRUE);
-    component.compute(4);
+    REQUIRE(component.compute(4) == nts::FALSE);
     REQUIRE(component.getPin(4).getState() == nts::FALSE);
 }
 
@@ -110,7 +110,7 @@ TEST_CASE("Simple NOR with output 4 : !(0 | 0) => 1")
 
     component.getPin(5).setState(nts::FALSE);
     component.getPin(6).setState(nts::FALSE);
-    component.compute(4);
+    REQUIRE(component.compute(4) == nts::TRUE);
     REQUIRE(component.getPin(4).getState() == nts::TRUE);
 }
 
@@ -124,7 +124,7 @@ TEST_CASE("Simple NOR with output 10 : !(1 | 1) => 0")
 
     component.getPin(8).setState(nts::TRUE);
     component.getPin(9).setState(nts::TRUE);
-    component.compute(10);
+    REQUIRE(component.compute(10) == nts::FALSE);
     REQUIRE(component.getPin(10).getState() == nts::FALSE);
 }
 
@@ -134,7 +134,7 @@ TEST_CASE("Simple NOR with output 10 : !(1 | 0) => 0")
 
     component.getPin(8).setState(nts::TRUE);
     component.getPin(9).setState(nts::FALSE);
-    component.compute(10);
+    REQUIRE(component.compute(10) == nts::FALSE);
     REQUIRE(component.getPin(10).getState() == nts::FALSE);
 }
 
@@ -144,7 +144,7 @@ TEST_CASE("Simple NOR with ouput 10 : !(0 | 1) => 0")
 
     component.getPin(8).setState(nts::FALSE);
     component.getPin(9).setState(nts::TRUE);
-    component.compute(10);
+    REQUIRE(component.compute(10) == nts::FALSE);
     REQUIRE(component.getPin(10).getState() == nts::FALSE);
 }
 
@@ -154,7 +154,7 @@ TEST_CASE("Simple NOR with output 10 : !(0 | 0) => 1")
 
     component.getPin(8).setState(nts::FALSE);
     component.getPin(9).setState(nts::FALSE);
-    component.compute(10);
+    REQUIRE(component.compute(10) == nts::TRUE);
     REQUIRE(component.getPin(10).getState() == nts::TRUE);
 }
 
@@ -168,7 +168,7 @@ TEST_CASE("Simple NOR with output 11 : !(1 | 1) => 0")
 
     component.getPin(12).setState(nts::TRUE);
     component.getPin(13).setState(nts::TRUE);
-    component.compute(11);
+    REQUIRE(component.compute(11) == nts::FALSE);
     REQUIRE(component.getPin(11).getState() == nts::FALSE);
 }
 
@@ -178,7 +178,7 @@ TEST_CASE("Simple NOR with output 11 : !(1 | 0) => 0")
 
     component.getPin(12).setState(nts::TRUE);
     component.getPin(13).setState(nts::FALSE);
-    component.compute(11);
+    REQUIRE(component.compute(11) == nts::FALSE);
     REQUIRE(component.getPin(11).getState() == nts::FALSE);
 }
 
@@ -188,7 +188,7 @@ TEST_CASE("Simple NOR with ouput 11 : !(0 | 1) => 0")
 
     component.getPin(12).setState(nts::FALSE);
     component.getPin(13).setState(nts::TRUE);
-    component.compute(11);
+    REQUIRE(component.compute(11) == nts::FALSE);
     REQUIRE(component.getPin(11).getState() == nts::FALSE);
 }
 
@@ -198,7 +198,7 @@ TEST_CASE("Simple NOR with output 11 : !(0 | 0) => 1")
 
     component.getPin(12).setState(nts::FALSE);
     component.getPin(13).setState(nts::FALSE);
-    component.compute(11);
+    REQUIRE(component.compute(11) == nts::TRUE);
     REQUIRE(component.getPin(11).getState() == nts::TRUE);
 }
 

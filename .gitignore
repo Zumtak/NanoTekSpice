@@ -6,3 +6,6 @@ nanotekspice
 *.gcda
 *.gcno
 catch_tests/tests
+*.html
+results_ut
+src/results_ut

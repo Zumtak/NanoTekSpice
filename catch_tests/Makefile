@@ -17,6 +17,9 @@ SRC	=	mainTest.cpp \
 		testOutput.cpp \
 		testComp4001.cpp \
 		testComp4011.cpp \
+		testComp4030.cpp \
+		testComp4069.cpp \
+		testComp4071.cpp \
 		../src/components/CompInput.cpp \
 		../src/components/CompClock.cpp \
 		../src/components/CompTrue.cpp \
@@ -24,6 +27,9 @@ SRC	=	mainTest.cpp \
 		../src/components/CompOutput.cpp \
 		../src/components/Comp4001.cpp \
 		../src/components/Comp4011.cpp \
+		../src/components/Comp4030.cpp \
+		../src/components/Comp4069.cpp \
+		../src/components/Comp4071.cpp \
 		../src/Pin.cpp \
 		../src/Wire.cpp \
 		../src/components/1PinComponents.cpp \

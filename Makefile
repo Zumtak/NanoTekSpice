@@ -23,6 +23,9 @@ SRC	= 	src/main.cpp \
 		src/components/CompClock.cpp \
 		src/components/Comp4001.cpp \
 		src/components/Comp4011.cpp \
+		src/components/Comp4030.cpp \
+		src/components/Comp4069.cpp \
+		src/components/Comp4071.cpp \
 
 OBJ	=	$(SRC:.cpp=.o)
 
