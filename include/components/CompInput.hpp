@@ -16,7 +16,7 @@ namespace nts {
             CompInput(const std::string &name) : Comp1Pin(name, nts::Input)
             {}
             nts::Tristate compute(std::size_t pin = 1) override;
-            bool setNewState(int state);
+            bool setNewState(int state) override;
             void dump(void) const override;
     };
 }

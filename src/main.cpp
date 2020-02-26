@@ -1,14 +1,17 @@
+/*
+** EPITECH PROJECT, 2019
+** NanoTekSpice
+** File description:
+** Main function
+*/
+
 #include <iostream>
-#include "components/CompInput.hpp"
-#include "Pin.hpp"
-#include "components/IComponents.hpp"
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    nts::CompInput test("test");
-    nts::Pin tmp = test.getPin(0);
-    nts::Tristate tmpState = tmp.getState();
-
-    std::cout << "pin state : " << tmpState << std::endl;
+    if (argc < 2) {
+        std::cerr << "Error : No arguments provided\nUsage : ./nanotekspice [NTS_FILE] {INPUT(S) VALUES}" << std::endl;
+        return (84);
+    }
     return 0;
 }
