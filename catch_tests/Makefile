@@ -7,7 +7,7 @@
 
 CC = g++
 
-CFLAGS = -W -Wall -Wextra -I../include --coverage
+CFLAGS = -W -Wall -Wextra -I../include -ggdb3 --coverage
 
 SRC	=	mainTest.cpp \
 		testInput.cpp \
@@ -22,6 +22,7 @@ SRC	=	mainTest.cpp \
 		testComp4071.cpp \
 		testComp4081.cpp \
 		testWire.cpp \
+		testCompute.cpp \
 		../src/components/CompInput.cpp \
 		../src/components/CompClock.cpp \
 		../src/components/CompTrue.cpp \

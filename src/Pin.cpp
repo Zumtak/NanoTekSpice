@@ -8,12 +8,13 @@
 #include "Pin.hpp"
 #include "components/IComponents.hpp"
 
-nts::Pin::Pin(const std::string &name, IComponent *componentOwner)
+nts::Pin::Pin(const std::string &name, IComponent *componentOwner, size_t nbId)
 {
     this->id = name;
     this->componentOwner = componentOwner;
     this->currentState = nts::Tristate::UNDEFINED;
     this->oldState = nts::Tristate::UNDEFINED;
+    this->nbId = nbId;
 }
 
 void nts::Pin::setState(Tristate state)
@@ -54,4 +55,9 @@ nts::IComponent *nts::Pin::getOwnerComponent(void) const
 std::string nts::Pin::getId(void) const
 {
     return (this->id);
+}
+
+size_t nts::Pin::getNbId(void) const
+{
+    return (this->nbId);
 }

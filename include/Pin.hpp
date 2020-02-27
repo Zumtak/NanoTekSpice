@@ -15,7 +15,7 @@ namespace nts {
     class Wire;
     class Pin {
         public:
-            Pin(const std::string &id, IComponent *componentOwner);
+            Pin(const std::string &id, IComponent *componentOwner, size_t nbId);
             void setState(Tristate state);
             Tristate getState(void) const;
             void setWire(nts::Wire *target);
@@ -23,12 +23,14 @@ namespace nts {
             void setOwnerComp(IComponent *owner);
             IComponent *getOwnerComponent(void) const;
             std::string getId(void) const;
+            size_t getNbId(void) const;
         private:
             std::string id;
             nts::Tristate currentState;
             nts::Tristate oldState;
             IComponent *componentOwner;
             nts::Wire *wire = nullptr;
+            size_t nbId;
     };
 }
 #endif

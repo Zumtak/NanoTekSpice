@@ -8,6 +8,7 @@
 #ifndef COMPONENTS_HPP_
 #define COMPONENTS_HPP_
 
+#include <cstddef>
 #include <iostream>
 #include <array>
 #include "Pin.hpp"
@@ -22,7 +23,7 @@ namespace nts {
             Component(const std::string &name, nts::ComponentType type, const std::array<Pin, TNbPins> &IOPins)
                 : name(name), type(type), IOPins(IOPins)
             {}
-            std::string getName(void) const
+            std::string getName(void) const override
             {
                 return (this->name);
             }
@@ -34,31 +35,28 @@ namespace nts {
             {
                 Wire *tmp = nullptr;
 
-                --pin;
-                --otherPin;
-                Component<TNbPins>* otherCmp = dynamic_cast<Component *>(other);
-                if (otherCmp->getPin(otherPin).getWire() != nullptr)
+                if (other->getPin(otherPin).getWire() != nullptr)
                     return;
-                if (this->IOPins.size() < pin || otherCmp->getPins().size() < otherPin
-                || pin < 0 || otherPin < 0)
-                    return;
-                if (this->IOPins[pin].getWire() == nullptr) {
-                    this->IOPins[pin].setWire(new Wire());
+                if (this->getPin(pin).getWire() == nullptr) {
+                    this->getPin(pin).setWire(new Wire());
                 }
-                tmp = this->IOPins[pin].getWire();
-                tmp->addPin(this->IOPins[pin], otherCmp->getPin(otherPin));
-                tmp->addPin(otherCmp->getPin(otherPin), this->IOPins[pin]);
-                otherCmp->getPin(otherPin).setWire(tmp);
+                tmp = this->getPin(pin).getWire();
+                tmp->addPin(this->getPin(pin), other->getPin(otherPin));
+                other->getPin(otherPin).setWire(tmp);
             }
             std::array<Pin, TNbPins> &getPins(void)
             {
                 return (this->IOPins);
             }
-            Pin &getPin(std::size_t pin = 1)
+            Pin &getPin(std::size_t pin = 1) override
             {
-                if (pin < 1)
+                if (pin < 1 || pin > this->IOPins.size())
                     return (this->IOPins[0]);
                 return (this->IOPins[pin - 1]);
+            }
+            size_t getNbPins() const override
+            {
+                return (this->IOPins.size());
             }
             void displayState(void) const override
             {}

@@ -14,8 +14,8 @@
 TEST_CASE("Add Pin function")
 {
     nts::Wire tmp;
-    nts::Pin pin1("pin1", nullptr);
-    nts::Pin pin2("pin2", nullptr);
+    nts::Pin pin1("pin1", nullptr, 1);
+    nts::Pin pin2("pin2", nullptr, 2);
 
     tmp.addPin(pin1, pin2);
     REQUIRE(tmp.getOtherPin(pin1).getId() == "pin2");

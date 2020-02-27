@@ -5,7 +5,6 @@
 ** Cpp file for output components
 */
 
-#include <iostream>
 #include "components/CompOutput.hpp"
 
 void nts::CompOutput::displayState(void) const
@@ -15,8 +14,11 @@ void nts::CompOutput::displayState(void) const
 
 nts::Tristate nts::CompOutput::compute(std::size_t pin)
 {
-    (void)pin;
-    return (this->IOPins[0].getState());
+    Wire *tmp = this->getPin(pin).getWire();
+
+    if (tmp != nullptr)
+        this->getPin(pin).setState(this->getPin(pin).getWire()->computeOtherComponent(this->getPin(pin)));
+    return (this->getPin(pin).getState());
 }
 
 void nts::CompOutput::dump(void) const
