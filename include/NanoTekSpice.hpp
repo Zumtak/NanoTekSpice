@@ -20,7 +20,9 @@ namespace nts {
             void simulate(void);
             void loop(void);
             void dump(void) const;
+            void prompt(void);
         private:
+            bool isGoodCommand(const std::string &name);
             std::vector<std::unique_ptr<IComponent>> components;
     };
 }
