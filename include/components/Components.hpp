@@ -8,6 +8,7 @@
 #ifndef COMPONENTS_HPP_
 #define COMPONENTS_HPP_
 
+#include <iostream>
 #include <array>
 #include "Pin.hpp"
 #include "Wire.hpp"
@@ -42,11 +43,12 @@ namespace nts {
                 || pin < 0 || otherPin < 0)
                     return;
                 if (this->IOPins[pin].getWire() == nullptr) {
-                    this->IOPins[pin].setWire(new nts::Wire());
+                    this->IOPins[pin].setWire(new Wire());
                 }
                 tmp = this->IOPins[pin].getWire();
-                tmp->addPin(this->IOPins[pin], 0);
-                tmp->addPin(otherCmp->getPin(otherPin), 1);
+                tmp->addPin(this->IOPins[pin], otherCmp->getPin(otherPin));
+                tmp->addPin(otherCmp->getPin(otherPin), this->IOPins[pin]);
+                otherCmp->getPin(otherPin).setWire(tmp);
             }
             std::array<Pin, TNbPins> &getPins(void)
             {

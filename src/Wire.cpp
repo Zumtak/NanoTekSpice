@@ -8,10 +8,19 @@
 #include "Wire.hpp"
 #include "Pin.hpp"
 
-void nts::Wire::addPin(const nts::Pin &target, char end)
+nts::Wire::Wire() : east{"", nullptr}, west{"", nullptr}
 {
-    if (end == 0)
-        this->west.push_back(target);
-    else
-        this->east.push_back(target);
+}
+
+void nts::Wire::addPin(const nts::Pin &me, const nts::Pin &target)
+{
+    this->west = me;
+    this->east = target;
+}
+
+nts::Pin &nts::Wire::getOtherPin(const nts::Pin &me)
+{
+    if (this->east.getId() == me.getId())
+        return (this->west);
+    return (this->east);
 }

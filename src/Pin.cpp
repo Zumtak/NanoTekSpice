@@ -5,8 +5,6 @@
 ** Pin class functions
 */
 
-#include <iostream>
-
 #include "Pin.hpp"
 #include "components/IComponents.hpp"
 

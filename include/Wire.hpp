@@ -14,10 +14,12 @@
 namespace nts {
     class Wire {
         public:
-            void addPin(const nts::Pin &target, char end);
+            Wire();
+            void addPin(const nts::Pin &me ,const nts::Pin &target);
+            nts::Pin &getOtherPin(const nts::Pin &me);
         private:
-            std::vector<nts::Pin> east;
-            std::vector<nts::Pin> west;
+            nts::Pin east;
+            nts::Pin west;
     };
 }
 
