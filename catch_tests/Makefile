@@ -7,7 +7,7 @@
 
 CC = g++
 
-CFLAGS = -W -Wall -Wextra -I../include -ggdb3 --coverage
+CFLAGS = -W -Wall -Wextra -I../include --coverage
 
 SRC	=	mainTest.cpp \
 		testInput.cpp \
