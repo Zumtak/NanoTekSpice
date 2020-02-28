@@ -22,7 +22,12 @@ SRC	=	mainTest.cpp \
 		testComp4071.cpp \
 		testComp4081.cpp \
 		testWire.cpp \
-		testCompute.cpp \
+		testCompute4001.cpp \
+		testCompute4011.cpp \
+		testCompute4030.cpp \
+		testCompute4069.cpp \
+		testCompute4071.cpp \
+		testCompute4081.cpp \
 		../src/components/CompInput.cpp \
 		../src/components/CompClock.cpp \
 		../src/components/CompTrue.cpp \
