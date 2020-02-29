@@ -18,7 +18,6 @@ namespace nts {
                 this->IOPins[0].setState(nts::FALSE);
             }
             nts::Tristate compute(std::size_t pin = 1) override;
-            void dump(void) const override;
     };
 }
 

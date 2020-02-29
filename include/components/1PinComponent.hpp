@@ -15,6 +15,7 @@ namespace nts {
     class Comp1Pin : public Component<1> {
         public:
             Comp1Pin(const std::string &name, nts::ComponentType type);
+            void dump(void) const override;
     };
 }
 

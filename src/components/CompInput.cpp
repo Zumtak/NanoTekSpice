@@ -23,7 +23,3 @@ bool nts::CompInput::setNewState(int state)
     this->IOPins[0].setState((nts::Tristate)state);
     return (true);
 }
-
-void nts::CompInput::dump(void) const
-{
-}

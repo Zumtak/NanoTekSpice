@@ -17,7 +17,6 @@ namespace nts {
             {}
             nts::Tristate compute(std::size_t pin = 1) override;
             bool setNewState(int state) override;
-            void dump(void) const override;
     };
 }
 

@@ -13,7 +13,3 @@ nts::Tristate nts::CompFalse::compute(size_t pin)
     (void) pin;
     return (nts::FALSE);
 }
-
-void nts::CompFalse::dump(void) const
-{
-}

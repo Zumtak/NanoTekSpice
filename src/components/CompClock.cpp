@@ -19,7 +19,3 @@ nts::Tristate nts::CompClock::compute(std::size_t pin)
         this->IOPins[0].setState(nts::TRUE);
     return (tmp);
 }
-
-void nts::CompClock::dump(void) const
-{
-}
