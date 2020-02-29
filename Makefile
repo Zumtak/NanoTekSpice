@@ -7,7 +7,7 @@
 
 CC = g++
 
-CXXFLAGS = -W -Wall -Wextra -Iinclude/
+CXXFLAGS = -W -Wall -Wextra -Iinclude/ -std=c++17
 
 SRC	= 	src/main.cpp \
 		src/Pin.cpp \

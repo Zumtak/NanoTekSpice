@@ -45,7 +45,7 @@ std::unique_ptr<nts::IComponent> nts::Factory::createComponent(const std::string
         {"4030", genComponent<Comp4030>},
         {"4069", genComponent<Comp4069>},
         {"4071", genComponent<Comp4071>},
-        {"4081", genComponent<Comp4081>},
+        {"4081", genComponent<Comp4081>}
     };
     it = compMap.find(type);
     if (it == compMap.end()) {

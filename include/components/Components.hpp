@@ -10,11 +10,14 @@
 
 #include <cstddef>
 #include <iostream>
+#include <iomanip>
 #include <array>
+#include <string_view>
 #include "Pin.hpp"
 #include "Wire.hpp"
 #include "IComponents.hpp"
 #include "ComponentType.hpp"
+#include "Color.hpp"
 
 namespace nts {
     template <size_t TNbPins>
@@ -65,10 +68,49 @@ namespace nts {
                 (void)state;
                 return (true);
             }
+            void dump() const override
+            {
+                nts::Tristate tmp = nts::UNDEFINED;
+
+                std::cout << std::setw(34) << "--------------------" << "\n";
+                std::cout << std::setw(14) << std::right << "|";
+                std::cout << std::setw(21) << std::right << "|";
+                std::cout << "\n";
+                for (size_t i = 0; i < TNbPins / 2; ++i) {
+                    tmp = this->IOPins[i].getState();
+                    if (tmp == 2)
+                        std::cout << std::setw(7) << std::right << YELLOW << "(" + std::to_string(tmp) + ")";
+                    else if (tmp == 1)
+                        std::cout << std::setw(7) << std::right << GREEN << "(" + std::to_string(tmp) + ")";
+                    else
+                        std::cout << std::setw(7) << std::right << RED << "(" + std::to_string(tmp) + ")";
+                    std::cout << RESET;
+                    std::cout << std::setw(4) << std::right << pinNames[i];
+                    std::cout << std::setw(5) << std::right << "--|";
+                    std::cout << std::setw(3) << std::right << std::to_string(i + 1);
+                    std::cout << std::setw(16) << std::right << std::to_string(i + (TNbPins / 2 + 1));
+                    std::cout << std::setw(6) << std::left << " |--";
+                    std::cout << std::setw(4) << std::left << pinNames[i + (TNbPins / 2)];
+                    tmp = this->IOPins[i + (TNbPins / 2)].getState();
+                    if (tmp == 2)
+                        std::cout << std::left << YELLOW << "(" + std::to_string(tmp) + ")";
+                    else if (tmp == 1)
+                        std::cout << std::left << GREEN << "(" + std::to_string(tmp) + ")";
+                    else
+                        std::cout << std::left << RED << "(" + std::to_string(tmp) + ")";
+                    std::cout << RESET;
+                    std::cout << "\n";
+                    std::cout << std::setw(14) << std::right << "|";
+                    std::cout << std::setw(21) << std::right << "|";
+                    std::cout << "\n";
+                }
+                std::cout << std::setw(34) << "--------------------" << "\n";
+            }
         protected:
             std::string name;
             nts::ComponentType type;
             std::array<Pin, TNbPins> IOPins;
+            std::array<std::string_view, TNbPins> pinNames;
     };
 }
 

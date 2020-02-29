@@ -40,7 +40,3 @@ nts::Tristate nts::Comp4030::compute(std::size_t pin)
         this->IOPins[pin - 1].setState(tmp);
     return (tmp);
 }
-
-void nts::Comp4030::dump() const
-{
-}

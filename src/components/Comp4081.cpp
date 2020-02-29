@@ -6,7 +6,6 @@
 */
 
 #include "components/Comp4081.hpp"
-#include "components/IComponents.hpp"
 
 nts::Tristate nts::Comp4081::compute(std::size_t pin)
 {
@@ -40,8 +39,4 @@ nts::Tristate nts::Comp4081::compute(std::size_t pin)
     if (tmp != nts::UNDEFINED && (pin == 3 || pin == 4 || pin == 10 || pin == 11))
         this->IOPins[pin - 1].setState(tmp);
     return (tmp);
-}
-
-void nts::Comp4081::dump() const
-{
 }

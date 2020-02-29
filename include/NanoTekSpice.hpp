@@ -9,21 +9,23 @@
 #define NANOTEKSPICE_HPP_
 
 #include <vector>
+#include <unordered_map>
 #include <memory>
 #include "components/IComponents.hpp"
 
 namespace nts {
     class NanoTekSpice {
         public:
-            void display(void) const;
+            void display(void);
             bool setInputState(const std::string &nameOuput, int value);
             void simulate(void);
             void loop(void);
-            void dump(void) const;
+            void dump(void);
             void prompt(void);
+            void addComponent(std::unique_ptr<IComponent> comp);
         private:
             bool isGoodCommand(const std::string &name);
-            std::vector<std::unique_ptr<IComponent>> components;
+            std::unordered_map<size_t, std::unique_ptr<IComponent>> components;
     };
 }
 

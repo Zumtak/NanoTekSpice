@@ -40,7 +40,3 @@ nts::Tristate nts::Comp4001::compute(std::size_t pin)
         this->getPin(pin).setState(tmp);
     return (tmp);
 }
-
-void nts::Comp4001::dump(void) const
-{
-}
