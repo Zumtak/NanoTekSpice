@@ -23,6 +23,7 @@ namespace nts {
             void dump(void);
             void prompt(void);
             void addComponent(std::unique_ptr<IComponent> comp);
+            size_t getComponent(const std::string &name);
         private:
             bool isGoodCommand(const std::string &name);
             std::unordered_map<size_t, std::unique_ptr<IComponent>> components;

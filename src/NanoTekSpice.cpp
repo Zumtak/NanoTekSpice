@@ -6,11 +6,13 @@
 */
 
 #include <algorithm>
+#include <cstddef>
 #include <deque>
 #include <functional>
 #include <memory>
 #include <regex>
 #include <iostream>
+#include <string>
 #include <string_view>
 #include <unordered_map>
 #include <utility>
@@ -112,4 +114,14 @@ bool nts::NanoTekSpice::isGoodCommand(const std::string &cmd)
 void nts::NanoTekSpice::addComponent(std::unique_ptr<nts::IComponent> comp)
 {
     this->components.emplace(this->components.size(), std::move(comp));
+}
+
+size_t nts::NanoTekSpice::getComponent(const std::string &name)
+{
+    size_t i = 0;
+
+    while (i < this->components.size() && this->components[i]->getName() != name) {
+        ++i;
+    }
+    return (i);
 }
