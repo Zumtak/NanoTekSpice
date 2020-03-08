@@ -5,91 +5,91 @@
 ** parser
 */
 
-#include <cstring>
 #include <fstream>
-#include <iostream>
+#include <regex>
+#include <string>
 #include <unordered_map>
-#include <vector>
+#include "NanoTekSpice.hpp"
 #include "Parser.hpp"
 #include "Factory.hpp"
+#include "components/IComponents.hpp"
 
-namespace
+static std::string escape_spaces_around(const std::string &line)
 {
-bool goTo(std::ifstream& stream, const std::string str)
-{
-    std::string buffer;
+    std::string tmp(std::regex_replace(line, std::regex("^ +"), ""));
+    tmp = std::regex_replace(tmp, std::regex(" +$"), "");
 
-    do
-    {
-    } while (getline(stream, buffer) && buffer != str);
-    if (buffer == str)
-    {
+    return (tmp);
+}
+
+static int getPinLink(const std::string &line)
+{
+    return (std::stoi(std::regex_replace(line, std::regex("(.*):"), "")));
+}
+
+static std::string getCompLink(const std::string &line)
+{
+    return (std::string(std::regex_replace(line, std::regex(":(.*)"), "")));
+}
+
+bool nts::Parser::addLink(const std::string &line)
+{
+    std::string tmp = escape_spaces_around(line);
+    std::string owner(std::regex_replace(tmp, std::regex(" (.*)"), ""));
+    std::string target(std::regex_replace(tmp, std::regex("(.*) "), ""));
+    std::string ownerName = getCompLink(owner);
+    std::string targetName = getCompLink(target);
+    auto it1 = this->buffComps.find(ownerName);
+    auto it2 = this->buffComps.find(targetName);
+
+    if (it1 == this->buffComps.end() || it2 == this->buffComps.end())
+        return (false);
+    this->buffComps[ownerName].get()->setLink(getPinLink(owner), this->buffComps[targetName], getPinLink(target));
+    return (true);
+}
+
+bool nts::Parser::addChipset(const nts::Factory &factory, const std::string &line)
+{
+    if (line == "")
         return (true);
-    }
-    return (false);
+    std::string tmp = escape_spaces_around(line);
+    std::string type(std::regex_replace(tmp, std::regex(" (.*)"), ""));
+    std::string name(std::regex_replace(tmp, std::regex("(.*) "), ""));
+    this->buffComps[name] = factory.createComponent(type, name);
+    return (true);
 }
 
-bool getChipsets(std::ifstream &stream, std::unordered_map<size_t, std::unique_ptr<IComponent>> components)
+void nts::Parser::Parsing(const std::string &filepath)
 {
-    std::string buffer;
-    char *token = NULL;
+    nts::Factory factory;
+    std::string line;
+    std::ifstream fileStream(filepath);
 
-    if (!goTo(stream, ".chipsets:\n"))
-    {
-        std::cerr << "No .chipsets marker detected in file.\n";
-        return (false);
+    if (!fileStream.good()) {
+        std::cout << "Problem with file :/" << std::endl;
+        return;
     }
-    while (getline(stream, buffer) && buffer != ".links:") {
-        token = strtok((char*)buffer.c_str(), "\t ");
-        if (token[0] == '#') {
+    while (std::getline(fileStream, line) && std::regex_match(line, std::regex("#(.*)"))) {}
+    while (std::getline(fileStream, line)) {
+        if (line != "\n")
             break;
-        } else if (!nts::Factory::createComponent(token, strtok((char*)buffer.c_str(), "\t "))) {
-            std::cerr << "Invalid component type detected.\n";
-            return (false);
-        }
     }
-    return (true);
+    if (line != ".chipsets:") {
+        std::cout << "No chipsets declaration" << std::endl;
+        return;
+    }
+    while (std::getline(fileStream, line) && line != ".links:") {
+        if (addChipset(factory, line) == false)
+            return;
+    }
+    while (std::getline(fileStream, line) && line != "") {
+        if (addLink(line) == false)
+            return;
+    }
+    std::cout << std::endl;
 }
 
-bool setLinks(std::ifstream& stream, std::unordered_map<size_t, std::unique_ptr<IComponent>> components)
+std::unordered_map<TYPE_COMPMAP_NANOTEK>& nts::Parser::getComponents(void)
 {
-    std::string buffer;
-    char *token = NULL;
-    std::vector<std::string> tokens;
-    std::unique_ptr<nts::IComponent> eastComp;
-    std::unique_ptr<nts::IComponent> westComp;
-
-    while (getline(stream, buffer)) {
-        token = strtok((char*)buffer.c_str(), "\t :");
-        while (token) {
-            token = strtok(NULL, "\t :");
-            tokens.push_back(token);
-        }
-        eastComp = nts::NanoTekSpice::getComponent(tokens[0]);
-        westComp = nts::NanoTekSpice::getComponent(tokens[2]);
-        if (!westComp ==  || !eastComp) {
-            std::cerr << "Undeclared component to link.\n";
-            return (false);
-        }
-        eastComp.setLink((size_t)atoi(tokens[1]), westComp, (size_t)atoi(token[3]));
-        }
-    return (true);
-}
-};
-
-bool nts::Parser::Parsing(std::string filepath, std::unordered_map<size_t, std::unique_ptr<IComponent>> components)
-{
-    std::ifstream stream;
-
-    stream.open(filepath);
-    if (!stream.is_open())
-    {
-        std::cerr << "A valid config file must be provided.\n";
-        return (false);
-    }
-    if (getChipsets(stream, components))
-    {
-        return (setLinks(stream, components));
-    }
-    return (true);
+    return this->buffComps;
 }

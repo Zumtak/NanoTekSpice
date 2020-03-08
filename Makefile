@@ -14,6 +14,7 @@ SRC	= 	src/main.cpp \
 		src/Wire.cpp \
 		src/NanoTekSpice.cpp \
 		src/Factory.cpp \
+		src/parser.cpp \
 		src/components/1PinComponents.cpp \
 		src/components/14PinsComponents.cpp \
 		src/components/16PinsComponents.cpp \

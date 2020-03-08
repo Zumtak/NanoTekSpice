@@ -8,6 +8,7 @@
 #ifndef ICOMPONENTS_HPP_
 #define ICOMPONENTS_HPP_
 
+#include <memory>
 #include <string>
 #include "ComponentType.hpp"
 
@@ -24,8 +25,8 @@ namespace nts {
        public:
            virtual ~IComponent() = default;
            virtual nts::Tristate compute(std::size_t pin = 1) = 0;
-           virtual void setLink(std::size_t pin, nts::IComponent *other,
-                   std::size_t otherPin) = 0;
+           virtual void setLink(std::size_t pin, const std::unique_ptr<nts::IComponent>
+                   &other, std::size_t otherPin) = 0;
            virtual std::string getName(void) const = 0;
            virtual nts::ComponentType getType(void) const = 0;
            virtual void displayState(void) const = 0;

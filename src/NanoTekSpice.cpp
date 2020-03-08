@@ -6,9 +6,6 @@
 */
 
 #include <algorithm>
-#include <cstddef>
-#include <deque>
-#include <functional>
 #include <memory>
 #include <regex>
 #include <iostream>
@@ -24,32 +21,28 @@
 
 void nts::NanoTekSpice::display(void)
 {
-    size_t size = this->components.size();
-
-    for (size_t i = 0; i < size; ++i) {
-        if (this->components[i]->getType() == nts::Output)
-            this->components[i]->displayState();
+    for (std::unordered_map<TYPE_COMPMAP_NANOTEK>::iterator it = this->components.begin();
+            it != this->components.end(); ++it) {
+        if (it->second->getType() == nts::Output)
+            it->second->displayState();
     }
 }
 
 bool nts::NanoTekSpice::setInputState(const std::string &nameInput, int value)
 {
-    size_t size = this->components.size();
+    auto it = this->components.find(nameInput);
 
-    for (size_t i = 0; i < size; ++i) {
-        if (this->components[i]->getName() == nameInput)
-            return (this->components[i]->setNewState(value));
-    }
-    return (false);
+    if (it == this->components.end())
+        return (false);
+    return (it->second->setNewState(value));
 }
 
 void nts::NanoTekSpice::simulate(void)
 {
-    size_t size = this->components.size();
-
-    for (size_t i = 0; i < size; ++i) {
-        if (this->components[i]->getType() == nts::Output)
-            this->components[i]->compute();
+    for (std::unordered_map<TYPE_COMPMAP_NANOTEK>::iterator it = this->components.begin();
+            it != this->components.end(); ++it) {
+        if (it->second->getType() == nts::Output)
+            it->second->compute();
     }
 }
 
@@ -62,15 +55,13 @@ void nts::NanoTekSpice::loop(void)
 
 void nts::NanoTekSpice::dump(void)
 {
-    size_t size = this->components.size();
-
-    for (size_t i = 0; i < size; ++i) {
-        std::cout << this->components[i].get()->getName() << " ("
-        << nts::ComponentTypeString[this->components[i].get()->getType()] << ")" << " :\n";
-        this->components[i]->dump();
-        std::cout << "\n";
+    for (std::unordered_map<TYPE_COMPMAP_NANOTEK>::iterator it = this->components.begin();
+            it != this->components.end(); ++it) {
+        std::cout << it->second->getName() << " ("
+        << nts::ComponentTypeString[it->second->getType()] << ")" << " :\n";
+        it->second->dump();
+        std::cout << "\n" << std::endl;
     }
-    std::cout << std::endl;
 }
 
 void nts::NanoTekSpice::prompt(void)
@@ -88,7 +79,6 @@ void nts::NanoTekSpice::prompt(void)
 
 bool nts::NanoTekSpice::isGoodCommand(const std::string &cmd)
 {
-    size_t size = this->components.size();
     std::string compName = std::regex_replace(cmd, std::regex("=(.*)"), "");
     std::unordered_map<std::string, void (nts::NanoTekSpice::*)(void)>
     mapFunc {
@@ -98,8 +88,9 @@ bool nts::NanoTekSpice::isGoodCommand(const std::string &cmd)
         {"dump", &nts::NanoTekSpice::dump}
     };
 
-    for (size_t i = 0; i < size; ++i) {
-        if (compName == this->components[i]->getName() && this->components[i]->getType() == nts::Input) {
+    for (std::unordered_map<TYPE_COMPMAP_NANOTEK>::iterator it = this->components.begin();
+            it != this->components.end(); ++it) {
+        if (compName == it->second->getName() && it->second->getType() == nts::Input) {
             this->setInputState(compName, std::stoi(std::regex_replace(cmd, std::regex("(.*)="), "")));
             return (true);
         }
@@ -111,17 +102,10 @@ bool nts::NanoTekSpice::isGoodCommand(const std::string &cmd)
     return (true);
 }
 
-void nts::NanoTekSpice::addComponent(std::unique_ptr<nts::IComponent> comp)
+void nts::NanoTekSpice::addComponents(std::unordered_map<TYPE_COMPMAP_NANOTEK> comps)
 {
-    this->components.emplace(this->components.size(), std::move(comp));
-}
-
-size_t nts::NanoTekSpice::getComponent(const std::string &name)
-{
-    size_t i = 0;
-
-    while (i < this->components.size() && this->components[i]->getName() != name) {
-        ++i;
+    for (std::unordered_map<TYPE_COMPMAP_NANOTEK>::iterator it = comps.begin();
+            it != comps.end(); ++it) {
+        this->components[it->first] = std::move(it->second);
     }
-    return (i);
 }

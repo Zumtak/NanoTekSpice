@@ -34,7 +34,8 @@ namespace nts {
             {
                 return (this->type);
             }
-            void setLink(std::size_t pin, nts::IComponent *other, std::size_t otherPin) override
+            void setLink(std::size_t pin, const std::unique_ptr<nts::IComponent>
+            &other, std::size_t otherPin) override
             {
                 Wire *tmp = nullptr;
 

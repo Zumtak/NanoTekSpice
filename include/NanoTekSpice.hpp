@@ -14,6 +14,7 @@
 #include "components/IComponents.hpp"
 
 namespace nts {
+    #define TYPE_COMPMAP_NANOTEK std::string, std::unique_ptr<nts::IComponent>
     class NanoTekSpice {
         public:
             void display(void);
@@ -22,11 +23,10 @@ namespace nts {
             void loop(void);
             void dump(void);
             void prompt(void);
-            void addComponent(std::unique_ptr<IComponent> comp);
-            size_t getComponent(const std::string &name);
-        private:
+            void addComponents(std::unordered_map<std::string, std::unique_ptr<IComponent>> comps);
+        protected:
             bool isGoodCommand(const std::string &name);
-            std::unordered_map<size_t, std::unique_ptr<IComponent>> components;
+            std::unordered_map<std::string, std::unique_ptr<IComponent>> components;
     };
 }
 

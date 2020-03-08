@@ -20,7 +20,3 @@ nts::Tristate nts::CompOutput::compute(std::size_t pin)
         this->getPin(pin).setState(this->getPin(pin).getWire()->computeOtherComponent(this->getPin(pin)));
     return (this->getPin(pin).getState());
 }
-
-void nts::CompOutput::dump(void) const
-{
-}
