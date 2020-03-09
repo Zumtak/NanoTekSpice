@@ -14,11 +14,14 @@
 #include "components/IComponents.hpp"
 
 namespace nts {
+
     #define TYPE_COMPMAP_NANOTEK std::string, std::unique_ptr<nts::IComponent>
+
     class NanoTekSpice {
         public:
             void display(void);
             bool setInputState(const std::string &nameOuput, int value);
+            void setInputState(char **argv);
             void simulate(void);
             void loop(void);
             void dump(void);

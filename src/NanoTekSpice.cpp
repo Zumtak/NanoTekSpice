@@ -37,6 +37,17 @@ bool nts::NanoTekSpice::setInputState(const std::string &nameInput, int value)
     return (it->second->setNewState(value));
 }
 
+void nts::NanoTekSpice::setInputState(char **argv)
+{
+    int i = 0;
+
+    while (argv[i]) {
+        this->setInputState(std::regex_replace(argv[i], std::regex("=(.*)"), ""),
+                std::stoi(std::regex_replace(argv[i], std::regex("(.*)="), "")));
+        ++i;
+    }
+}
+
 void nts::NanoTekSpice::simulate(void)
 {
     for (std::unordered_map<TYPE_COMPMAP_NANOTEK>::iterator it = this->components.begin();

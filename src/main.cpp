@@ -25,6 +25,9 @@ int main(int argc, char *argv[])
     }
     parser.Parsing(argv[1]);
     NanoTek.addComponents(std::move(parser.getComponents()));
+    if (argc > 2) {
+        NanoTek.setInputState(argv + 2);
+    }
     NanoTek.prompt();
     return (0);
 }
