@@ -1,7 +1,6 @@
 *.o
 .clangd
 compile_commands.json
-nts_files/*
 nanotekspice
 *.gcda
 *.gcno
