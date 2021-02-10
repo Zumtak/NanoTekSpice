@@ -32,6 +32,25 @@ static std::string getCompLink(const std::string &line)
     return (std::string(std::regex_replace(line, std::regex(":(.*)"), "")));
 }
 
+static std::string ltrim(const std::string& s)
+{
+    const std::string whitespaces = " \n\r\t\f\v";
+	size_t start = s.find_first_not_of(whitespaces);
+	return (start == std::string::npos) ? "" : s.substr(start);
+}
+
+static std::string rtrim(const std::string& s)
+{
+    const std::string whitespaces = " \n\r\t\f\v";
+	size_t end = s.find_last_not_of(whitespaces);
+	return (end == std::string::npos) ? "" : s.substr(0, end + 1);
+}
+
+static std::string trim(const std::string& s)
+{
+	return rtrim(ltrim(s));
+}
+
 bool nts::Parser::addLink(const std::string &line)
 {
     std::string tmp = escape_spaces_around(line);
@@ -74,11 +93,16 @@ void nts::Parser::Parsing(const std::string &filepath)
         if (line != "\n")
             break;
     }
+    line = trim(line);
     if (line != ".chipsets:") {
         std::cout << "No chipsets declaration" << std::endl;
         return;
     }
-    while (std::getline(fileStream, line) && line != ".links:") {
+    while (std::getline(fileStream, line)) {
+        line = trim(line);
+        if (line == ".links:") {
+            break;
+        }
         if (addChipset(factory, line) == false)
             return;
     }
